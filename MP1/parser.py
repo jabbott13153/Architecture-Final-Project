@@ -2,9 +2,9 @@ file_in = open("memory.txt", "r")
 file_out = open("memory.dat" , "w")
 
 commands = {}
-commands["lw"] = ("1001", 5, 5, 16)
-commands["sw"] = ("1010", 5, 5, 16)
-commands["sub"] = ("0011", 5, 5, 5)
+commands["lw"] = ("001001", 5, 5, 16) #load word
+commands["sw"] = ("001010", 5, 5, 16) #store word
+commands["sub"] = ("000011", 5, 5) #subtract 
 labels = []
 
 
@@ -19,7 +19,7 @@ def translate(definitions):
     #compute memory location
     for i in definitions:
         pass
-    #
+    #use a double loop because 
     for j in range(0, len(definitions)):
         for i in range (0, len(definitions)):
             NextHexCode = ""
