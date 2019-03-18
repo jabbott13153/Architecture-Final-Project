@@ -2,9 +2,9 @@ file_in = open("memory.txt", "r")
 file_out = open("memory.dat" , "w")
 
 commands = {}
-commands["lw"] = ("001001", 5, 5, 16) #load word
-commands["sw"] = ("001010", 5, 5, 16) #store word
-commands["sub"] = ("000011", 5, 5) #subtract 
+commands["lw"] = ("001001", 5, 5, 16) #load word; opcode, reg1, reg2, info to be stored
+commands["sw"] = ("001010", 5, 5, 16) #store word; opcode, reg1, reg2, info to be stored
+commands["sub"] = ("000011", 5, 5, 5) #subtract; opcode, reg1, reg2, reg3
 labels = []
 
 
@@ -13,7 +13,7 @@ definitions = [ sublist.strip().split() for sublist in data.splitlines() ]
 #use partition
 def translate(definitions):
     #store the translated commands as lists of strings
-    translated = []
+    #translated = []
     #allocate memory sizes
     #insert the variable into a dictionary that stores the assigned memory address of the variable
     #compute memory location
@@ -32,12 +32,13 @@ def translate(definitions):
                 labels.append(definitions[j][i + 1])
             #if it ends with a semicolon, it's a new line
             if definitions[j][i] ==";":
-                translated.append("\n")
+                NextHexCode += "\n"
             #only the first item in each list will be an instruction, so only pull that and translate it
             if i == 0:
-                translated.append(commands[definitions[j][i]][0])
+                NextHexCode  += str(commands[definitions[j][i]][0])
+            file_out.write(NextHexCode)
+            NextHexCode = ""
     
-    print(translated)
   
 
 translate(definitions) 
